@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 .btn:focus {
     box-shadow: none;
+}
+#app {
+    font-family: 'Open Sans', var(--bs-font-sans-serif);
+}
+.default-font {
+    font-family: var(--bs-font-sans-serif);
 }
