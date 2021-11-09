@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex flex-row flex-grow-1">
         <div class="bg-light border-end">
-            Actions
+            Actions<i class="bi bi-file-earmark-plus"></i>
         </div>
         <main class="flex-grow-1">
             Main table
