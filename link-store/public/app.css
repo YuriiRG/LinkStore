@@ -8,3 +8,6 @@
 .default-font {
     font-family: var(--bs-font-sans-serif);
 }
+body, #app {
+    height: 100vh;
+}
