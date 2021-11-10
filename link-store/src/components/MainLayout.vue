@@ -13,6 +13,9 @@
             <div class="border action-icon-block btn" title="Remove folder" v-on:click="removeFolder()">
                 <i class="bi bi-folder-minus action-icon"></i>
             </div>
+            <div class="border action-icon-block btn" title="Remove folder" v-on:click="editLink()">
+                <i class="bi bi-pencil-square action-icon"></i>
+            </div>
         </div>
         <main class="flex-grow-1">
             Main table
@@ -34,6 +37,9 @@ export default {
         },
         removeFolder() {
             alert("removeFolder");
+        },
+        editLink() {
+            alert("removeFolder");
         }
     }
 }
@@ -48,6 +54,10 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 0%;
+}
+.action-icon-block:hover {
+    background-color: #E6E6E6;
 }
 .action-sidebar {
     width: 4em;
