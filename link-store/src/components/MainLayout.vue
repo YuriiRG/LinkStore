@@ -21,13 +21,13 @@
             <table style="width: 100%">
                 <thead>
                     <tr>
-                        <th style="width: 40%">Name</th>
-                        <th style="width: 40%">Purpose</th>
+                        <th style="width: 35%">Name</th>
+                        <th style="width: 45%">Purpose</th>
                         <th style="width: 20%">Creation date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <stored-item/>
+                    <stored-item/>  
                 </tbody>
             </table>
         </main>
@@ -36,7 +36,7 @@
 <script>
 import StoredItem from './StoredItem.vue';
 export default {
-  components: { StoredItem },
+    components: { StoredItem },
     name: 'MainLayout',
     methods: {
         newLink() {
