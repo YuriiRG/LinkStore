@@ -27,18 +27,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><i class="bi bi-folder"></i> PubChem</td>
-                        <td>Chemical search engine</td>
-                        <td>11.11.1111</td>
-                    </tr>
+                    <stored-item/>
                 </tbody>
             </table>
         </main>
     </div>
 </template>
 <script>
+import StoredItem from './StoredItem.vue';
 export default {
+  components: { StoredItem },
     name: 'MainLayout',
     methods: {
         newLink() {
@@ -59,11 +57,11 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style>
 .action-icon {
     font-size: 3em;
 }
-.action-icon-block {
+div .action-icon-block {
     width: 4em;
     height: 4em;
     display: flex;
