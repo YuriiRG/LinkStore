@@ -21,16 +21,16 @@
             <table style="width: 100%">
                 <thead>
                     <tr>
-                        <th style="width: 50%">Name</th>
+                        <th style="width: 40%">Name</th>
                         <th style="width: 40%">Purpose</th>
-                        <th style="width: 10%">Creation date</th>
+                        <th style="width: 20%">Creation date</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>11111111</td>
-                        <td>1111111</td>
-                        <td>1111111</td>
+                        <td><i class="bi bi-folder"></i> PubChem</td>
+                        <td>Chemical search engine</td>
+                        <td>11.11.1111</td>
                     </tr>
                 </tbody>
             </table>
@@ -79,5 +79,12 @@ export default {
 }
 main table {
     margin: 0;
+}
+main td, main th {
+    border: 1px solid #dee2e6;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+    font-weight: 400;
+    font-size: 15pt;
 }
 </style>
