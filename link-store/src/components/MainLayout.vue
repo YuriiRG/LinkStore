@@ -18,7 +18,22 @@
             </div>
         </div>
         <main class="flex-grow-1">
-            Main table
+            <table style="width: 100%">
+                <thead>
+                    <tr>
+                        <th style="width: 50%">Name</th>
+                        <th style="width: 40%">Purpose</th>
+                        <th style="width: 10%">Creation date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>11111111</td>
+                        <td>1111111</td>
+                        <td>1111111</td>
+                    </tr>
+                </tbody>
+            </table>
         </main>
     </div>
 </template>
@@ -57,9 +72,12 @@ export default {
     border-radius: 0%;
 }
 .action-icon-block:hover {
-    background-color: #E6E6E6;
+    background-color: #E8E9EB;
 }
 .action-sidebar {
     width: 4em;
+}
+main table {
+    margin: 0;
 }
 </style>
