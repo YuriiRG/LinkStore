@@ -29,10 +29,12 @@
                 <tbody>
                     <stored-item v-for="(entry, i) in linkList" :key="entry.name" 
                     @selectRow="selectRow(i)"
+                    @changeDir="changeDir(entry)"
                     :name="entry.name"
                     :isSelected="entry.isSelected"
                     :purpose="entry.purpose"
-                    :type="entry.type"/>
+                    :type="entry.type"
+                    :link="entry.link"/>
                 </tbody>
             </table>
         </main>
@@ -74,6 +76,9 @@ export default {
                 purpose: this.newLinkData.purpose
             });
         },
+        changeDir(entry) {
+            alert(`changing dir to ${entry.name}`);
+        },
         newFolder() {
             alert("newFolder");
         },
@@ -94,7 +99,8 @@ export default {
                     type: "link",
                     name: "first",
                     isSelected: false,
-                    purpose: "test link"
+                    purpose: "test link",
+                    link: "https://example.com"
                 },
                 {
                     type: "category",
