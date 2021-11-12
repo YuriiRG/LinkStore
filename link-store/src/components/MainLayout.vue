@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <stored-item/>  
+                    <stored-item v-for="entry in linkList" :key="entry.name" :name="entry.name" :isSelected="entry.isSelected"/>
                 </tbody>
             </table>
         </main>
@@ -53,6 +53,20 @@ export default {
         },
         editLink() {
             alert("removeFolder");
+        }
+    },
+    data() {
+        return {
+            linkList: [
+                {
+                    name: "first",
+                    isSelected: false
+                },
+                {
+                    name: "second",
+                    isSelected: true
+                },
+            ]
         }
     }
 }
@@ -84,5 +98,8 @@ main td, main th {
     padding-left: 0.25rem;
     font-weight: 400;
     font-size: 15pt;
+}
+main tbody tr.selected {
+    background-color: var(--bs-light);
 }
 </style>
