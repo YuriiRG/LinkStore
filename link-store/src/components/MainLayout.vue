@@ -27,7 +27,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <stored-item v-for="(entry, i) in linkList" :key="entry.name" 
+                    <stored-item v-for="(entry, i) in onlyFolders" :key="entry.name" 
+                    @selectRow="selectRow(i)"
+                    @changeDir="changeDir(entry)"
+                    :name="entry.name"
+                    :isSelected="entry.isSelected"
+                    :purpose="entry.purpose"
+                    :type="entry.type"
+                    :link="entry.link"/>
+                    <stored-item v-for="(entry, i) in onlyLinks" :key="entry.name" 
                     @selectRow="selectRow(i)"
                     @changeDir="changeDir(entry)"
                     :name="entry.name"
@@ -73,7 +81,8 @@ export default {
         newLink() {
             this.linkList.push({
                 name: this.newLinkData.name,
-                purpose: this.newLinkData.purpose
+                purpose: this.newLinkData.purpose,
+                type: "link"
             });
         },
         changeDir(entry) {
@@ -90,6 +99,18 @@ export default {
         },
         editLink() {
             alert("removeFolder");
+        }
+    },
+    computed: {
+        onlyFolders: function() {
+            let currentFolders = this.linkList;
+            currentFolders = currentFolders.filter(c => c.type == "category");
+            return currentFolders;
+        },
+        onlyLinks: function() {
+            let currentFolders = this.linkList;
+            currentFolders = currentFolders.filter(c => c.type == "link");
+            return currentFolders;
         }
     },
     data() {
