@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <stored-item v-for="entry in linkList" :key="entry.name" :name="entry.name" :isSelected="entry.isSelected"/>
+                    <stored-item v-for="(entry, i) in linkList" :key="entry.name" :name="entry.name" :isSelected="entry.isSelected" @selectRow="selectRow(i)"/>
                 </tbody>
             </table>
         </main>
@@ -39,6 +39,12 @@ export default {
     components: { StoredItem },
     name: 'MainLayout',
     methods: {
+        selectRow(index) {
+            for (let i = 0; i < this.linkList.length; i++) {
+                this.linkList[i].isSelected = false;
+            }
+            this.linkList[index].isSelected = true;
+        },
         newLink() {
             alert("newLink");
         },
@@ -64,7 +70,7 @@ export default {
                 },
                 {
                     name: "second",
-                    isSelected: true
+                    isSelected: false
                 },
             ]
         }
