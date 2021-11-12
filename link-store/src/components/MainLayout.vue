@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex flex-row flex-grow-1">
         <div class="bg-light border-end action-sidebar">
-            <div class="border action-icon-block btn" title="Add new link" v-on:click="newLink()">
+            <div class="border action-icon-block btn" title="Add new link" data-bs-toggle="modal" data-bs-target="#new-link-model">
                 <i class="bi bi-file-earmark-plus action-icon"></i>
             </div>
             <div class="border action-icon-block btn" title="Add new folder" v-on:click="newFolder()">
@@ -27,10 +27,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <stored-item v-for="(entry, i) in linkList" :key="entry.name" :name="entry.name" :isSelected="entry.isSelected" @selectRow="selectRow(i)"/>
+                    <stored-item v-for="(entry, i) in linkList" :key="entry.name" 
+                    @selectRow="selectRow(i)"
+                    :name="entry.name"
+                    :isSelected="entry.isSelected"
+                    :purpose="entry.purpose"
+                    :type="entry.type"/>
                 </tbody>
             </table>
         </main>
+    </div>
+    <div class="modal fade" id="new-link-model" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New link</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input class="form-control" placeholder="Name" v-model="newLinkData.name">
+                    <input class="form-control" placeholder="Purpose" v-model="newLinkData.purpose">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" mb-3>Cancel</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="newLink()">Save</button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -46,7 +69,10 @@ export default {
             this.linkList[index].isSelected = true;
         },
         newLink() {
-            alert("newLink");
+            this.linkList.push({
+                name: this.newLinkData.name,
+                purpose: this.newLinkData.purpose
+            });
         },
         newFolder() {
             alert("newFolder");
@@ -65,14 +91,21 @@ export default {
         return {
             linkList: [
                 {
+                    type: "link",
                     name: "first",
-                    isSelected: false
+                    isSelected: false,
+                    purpose: "test link"
                 },
                 {
+                    type: "category",
                     name: "second",
                     isSelected: false
                 },
-            ]
+            ],
+            newLinkData: {
+                name: "",
+                purpose: ""
+            }
         }
     }
 }
@@ -97,6 +130,9 @@ div .action-icon-block {
 }
 main table {
     margin: 0;
+    border-spacing: 0;
+    border-collapse: separate;
+    border-bottom: 1px solid #dee2e6;
 }
 main td, main th {
     border: 1px solid #dee2e6;
