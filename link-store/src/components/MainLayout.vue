@@ -45,11 +45,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input class="form-control" placeholder="Name" v-model="newLinkData.name">
+                    <input class="form-control mb-2" placeholder="Name" v-model="newLinkData.name">
                     <input class="form-control" placeholder="Purpose" v-model="newLinkData.purpose">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" mb-3>Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="newLink()">Save</button>
                 </div>
             </div>
