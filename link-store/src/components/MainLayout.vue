@@ -27,16 +27,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <stored-item v-for="(entry, i) in onlyFolders" :key="entry.name" 
-                    @selectRow="selectRow(i)"
+                    <stored-item v-for="entry in onlyFolders" :key="entry.name" 
+                    @selectRow="selectRow(linkList.indexOf(entry))"
                     @changeDir="changeDir(entry)"
                     :name="entry.name"
                     :isSelected="entry.isSelected"
                     :purpose="entry.purpose"
                     :type="entry.type"
                     :link="entry.link"/>
-                    <stored-item v-for="(entry, i) in onlyLinks" :key="entry.name" 
-                    @selectRow="selectRow(i)"
+                    
+                    <stored-item v-for="entry in onlyLinks" :key="entry.name" 
+                    @selectRow="selectRow(linkList.indexOf(entry))"
                     @changeDir="changeDir(entry)"
                     :name="entry.name"
                     :isSelected="entry.isSelected"
