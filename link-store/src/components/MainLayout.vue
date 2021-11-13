@@ -82,7 +82,7 @@ export default {
             this.linkList[index].isSelected = true;
         },
         newLink() {
-            let isLink = /^(www\.|http:\/\/|https:\/\/)/;
+            let isLink = /^(http:|https:)\/\//;
             if (!isLink.test(this.newLinkData.link)) {
                 this.newLinkData.link = "http://" + this.newLinkData.link;
             }
