@@ -21,7 +21,12 @@
             <table style="width: 100%">
                 <thead>
                     <tr>
-                        <th style="width: 35%">Name</th>
+                        <th style="width: 35%; padding: 0; margin: 0">
+                            <div class="d-flex flex-row" style="width: 100%;">
+                                <div v-on:click="goUpFolder()" class="flex-center border-end"><i class="bi bi-arrow-up-short"></i></div>
+                                <div class="flex-grow-1 ps-2">Name</div>
+                            </div>
+                        </th>
                         <th style="width: 45%">Purpose</th>
                         <th style="width: 20%">Creation date</th>
                     </tr>
@@ -116,7 +121,7 @@ export default {
             }
         },
         changeDir(entry) {
-            this.currentFolder = entry;
+            this.currentPath.push(entry);
         },
         newFolder() {
             this.linkList.push({
@@ -140,6 +145,11 @@ export default {
         },
         editLink() {
             alert("removeFolder");
+        },
+        goUpFolder() {
+            if (this.currentPath == [])
+                return;
+            this.currentPath.pop();
         }
     },
     computed: {
@@ -153,13 +163,15 @@ export default {
             currentFolders = currentFolders.filter(c => c.type == "link");
             return currentFolders;
         },
+        currentFolder: function() {
+            return this.currentPath[this.currentPath.length - 1];
+        },
         linkList: function() {
             if (this.currentFolder != null) {
                 return this.currentFolder.children;
             } else {
                 return this.linkTree;
-            }
-            
+            }  
         },
     },
     data() {
@@ -186,7 +198,6 @@ export default {
                     ]
                 },
             ],
-            currentFolder: null,
             newLinkData: {
                 name: "",
                 purpose: "",
@@ -194,7 +205,8 @@ export default {
             },
             newFolderData: {
                 name: ""
-            }
+            },
+            currentPath: []
         }
     }
 }
@@ -210,6 +222,11 @@ div .action-icon-block {
     justify-content: center;
     align-items: center;
     border-radius: 0%;
+}
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .action-icon-block:hover {
     background-color: #E8E9EB;
@@ -229,6 +246,8 @@ main td, main th {
     padding-left: 0.25rem;
     font-weight: 400;
     font-size: 15pt;
+    user-select: none;
+    -webkit-user-select: none;
 }
 main tbody tr.selected {
     background-color: var(--bs-light);
