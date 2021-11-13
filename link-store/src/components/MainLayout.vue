@@ -92,6 +92,11 @@ export default {
                 link: this.newLinkData.link,
                 type: "link"
             });
+            this.newLinkData = {
+                name: "",
+                purpose: "",
+                link: ""
+            }
         },
         changeDir(entry) {
             this.currentFolder = entry;
