@@ -4,7 +4,7 @@
             <div class="border action-icon-block btn" title="Add new link" data-bs-toggle="modal" data-bs-target="#new-link-model">
                 <i class="bi bi-file-earmark-plus action-icon"></i>
             </div>
-            <div class="border action-icon-block btn" title="Add new folder" v-on:click="newFolder()">
+            <div class="border action-icon-block btn" title="Add new folder" data-bs-toggle="modal" data-bs-target="#new-folder-model">
                 <i class="bi bi-folder-plus action-icon"></i>
             </div>
             <div class="border action-icon-block btn" title="Remove link" v-on:click="removeLink()">
@@ -68,6 +68,23 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="new-folder-model" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input class="form-control mb-2" placeholder="Name" v-model="newFolderData.name">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="newFolder()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
 import StoredItem from './StoredItem.vue';
@@ -102,7 +119,18 @@ export default {
             this.currentFolder = entry;
         },
         newFolder() {
-            alert("newFolder");
+            this.linkList.push({
+                name: this.newFolderData.name,
+                type: "category",
+                isSelected: false,
+                children: []
+            });
+            this.newFolderData = {
+                name: "",
+                type: "category",
+                isSelected: false,
+                children: []
+            }
         },
         removeLink() {
             alert("removeLink");
@@ -163,6 +191,9 @@ export default {
                 name: "",
                 purpose: "",
                 link: ""
+            },
+            newFolderData: {
+                name: ""
             }
         }
     }
