@@ -87,7 +87,7 @@ export default {
             });
         },
         changeDir(entry) {
-            alert(`changing dir to ${entry.name}`);
+            this.currentFolder = entry;
         },
         newFolder() {
             alert("newFolder");
@@ -104,32 +104,51 @@ export default {
     },
     computed: {
         onlyFolders: function() {
+            console.log(this.linkList);
             let currentFolders = this.linkList;
             currentFolders = currentFolders.filter(c => c.type == "category");
             return currentFolders;
         },
         onlyLinks: function() {
+            console.log(this.linkList)
             let currentFolders = this.linkList;
             currentFolders = currentFolders.filter(c => c.type == "link");
             return currentFolders;
-        }
+        },
+        linkList: function() {
+            if (this.currentFolder != null) {
+                return this.currentFolder.children;
+            } else {
+                return this.linkTree;
+            }
+            
+        },
     },
     data() {
         return {
-            linkList: [
-                {
-                    type: "link",
-                    name: "first",
-                    isSelected: false,
-                    purpose: "test link",
-                    link: "https://example.com"
-                },
+            linkTree: [
                 {
                     type: "category",
-                    name: "second",
-                    isSelected: false
+                    name: "maincat",
+                    isSelected: false,
+                    children: [
+                        {
+                            type: "link",
+                            name: "first",
+                            isSelected: false,
+                            purpose: "test link",
+                            link: "https://example.com",
+                        },
+                        {
+                            type: "category",
+                            name: "second",
+                            isSelected: false,
+                            children: []
+                        }
+                    ]
                 },
             ],
+            currentFolder: null,
             newLinkData: {
                 name: "",
                 purpose: ""
