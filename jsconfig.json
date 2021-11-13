@@ -1,3 +1,6 @@
 {
-  "include": ["link-store/src"]
+  "include": ["link-store/src"],
+  "compilerOptions": {
+    "sourceMap": true
+  }
 }

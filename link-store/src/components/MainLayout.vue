@@ -104,13 +104,11 @@ export default {
     },
     computed: {
         onlyFolders: function() {
-            console.log(this.linkList);
             let currentFolders = this.linkList;
             currentFolders = currentFolders.filter(c => c.type == "category");
             return currentFolders;
         },
         onlyLinks: function() {
-            console.log(this.linkList)
             let currentFolders = this.linkList;
             currentFolders = currentFolders.filter(c => c.type == "link");
             return currentFolders;
