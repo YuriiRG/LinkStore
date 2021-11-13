@@ -57,7 +57,9 @@
                 </div>
                 <div class="modal-body">
                     <input class="form-control mb-2" placeholder="Name" v-model="newLinkData.name">
-                    <input class="form-control" placeholder="Purpose" v-model="newLinkData.purpose">
+                    <input class="form-control mb-2" placeholder="Purpose" v-model="newLinkData.purpose">
+                    <input class="form-control" placeholder="Link" v-model="newLinkData.link">
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -80,9 +82,14 @@ export default {
             this.linkList[index].isSelected = true;
         },
         newLink() {
+            let isLink = /^(www\.|http:\/\/|https:\/\/)/;
+            if (!isLink.test(this.newLinkData.link)) {
+                this.newLinkData.link = "http://" + this.newLinkData.link;
+            }
             this.linkList.push({
                 name: this.newLinkData.name,
                 purpose: this.newLinkData.purpose,
+                link: this.newLinkData.link,
                 type: "link"
             });
         },
@@ -149,7 +156,8 @@ export default {
             currentFolder: null,
             newLinkData: {
                 name: "",
-                purpose: ""
+                purpose: "",
+                link: ""
             }
         }
     }
