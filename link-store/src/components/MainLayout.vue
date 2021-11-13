@@ -7,13 +7,10 @@
             <div class="border action-icon-block btn" title="Add new folder" data-bs-toggle="modal" data-bs-target="#new-folder-model">
                 <i class="bi bi-folder-plus action-icon"></i>
             </div>
-            <div class="border action-icon-block btn" title="Remove link" v-on:click="removeLink()">
-                <i class="bi bi-file-earmark-minus action-icon"></i>
+            <div class="border action-icon-block btn" title="Remove" v-on:click="removeLink()">
+                <i class="bi bi-file-earmark-x action-icon"></i>
             </div>
-            <div class="border action-icon-block btn" title="Remove folder" v-on:click="removeFolder()">
-                <i class="bi bi-folder-minus action-icon"></i>
-            </div>
-            <div class="border action-icon-block btn" title="Remove folder" v-on:click="editLink()">
+            <div class="border action-icon-block btn" title="Edit" v-on:click="editLink()">
                 <i class="bi bi-pencil-square action-icon"></i>
             </div>
         </div>
@@ -138,10 +135,10 @@ export default {
             }
         },
         removeLink() {
-            alert("removeLink");
-        },
-        removeFolder() {
-            alert("removeFolder");
+            let selected = this.linkList.filter(c => c.isSelected);
+            if (selected.length > 0) {
+                this.linkList.splice(this.linkList.indexOf(selected[0]), 1);
+            }
         },
         editLink() {
             alert("removeFolder");
