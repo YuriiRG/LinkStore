@@ -10,7 +10,7 @@
             <div class="border action-icon-block btn" title="Remove" v-on:click="removeLink()">
                 <i class="bi bi-file-earmark-x action-icon"></i>
             </div>
-            <div class="border action-icon-block btn" title="Edit" v-on:click="editLink()">
+            <div class="border action-icon-block btn" title="Edit" data-bs-toggle="modal" data-bs-target="#edit-link-model" v-on:click="initEditLink()">
                 <i class="bi bi-pencil-square action-icon"></i>
             </div>
         </div>
@@ -87,6 +87,27 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="edit-link-model" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit selected link or folder</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input class="form-control mb-2" placeholder="Name" v-model="editLinkData.name">
+                    <template v-if="editLinkData.type == 'link'">
+                        <input class="form-control mb-2" placeholder="Purpose" v-model="editLinkData.purpose">
+                        <input class="form-control mb-2" placeholder="Link" v-model="editLinkData.link">
+                    </template>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="editLink()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
 import StoredItem from './StoredItem.vue';
@@ -140,8 +161,23 @@ export default {
                 this.linkList.splice(this.linkList.indexOf(selected[0]), 1);
             }
         },
+        initEditLink() {
+            this.editLinkData.name = this.getSelectedEntry().name;
+            this.editLinkData.type = this.getSelectedEntry().type;
+            this.editLinkData.purpose = this.getSelectedEntry().purpose;
+            this.editLinkData.link = this.getSelectedEntry().link;
+        },
+        getSelectedEntry() {
+            if (this.linkList.filter(c => c.isSelected == true).length == 0) {
+                return null;
+            }
+            return this.linkList.filter(c => c.isSelected == true)[0];
+        },
         editLink() {
-            alert("removeFolder");
+            this.getSelectedEntry().name = this.editLinkData.name;
+            this.getSelectedEntry().type = this.editLinkData.type;
+            this.getSelectedEntry().purpose = this.editLinkData.purpose;
+            this.getSelectedEntry().link = this.editLinkData.link;
         },
         goUpFolder() {
             if (this.currentPath == [])
@@ -202,6 +238,12 @@ export default {
             },
             newFolderData: {
                 name: ""
+            },
+            editLinkData: {
+                name: "",
+                purpose: "",
+                link: "",
+                type: ""
             },
             currentPath: []
         }
