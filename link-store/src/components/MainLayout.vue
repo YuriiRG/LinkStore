@@ -7,10 +7,10 @@
             <div class="border action-icon-block btn" title="Add new folder" data-bs-toggle="modal" data-bs-target="#new-folder-model">
                 <i class="bi bi-folder-plus action-icon"></i>
             </div>
-            <div class="border action-icon-block btn" title="Remove" v-on:click="removeLink()">
+            <div class="border action-icon-block btn" :class="isSomethingSelected ? '' : 'disabled'" title="Remove" v-on:click="removeLink()">
                 <i class="bi bi-file-earmark-x action-icon"></i>
             </div>
-            <div class="border action-icon-block btn" title="Edit" data-bs-toggle="modal" data-bs-target="#edit-link-model" v-on:click="initEditLink()">
+            <div class="border action-icon-block btn" :class="isSomethingSelected ? '' : 'disabled'" title="Edit" data-bs-toggle="modal" data-bs-target="#edit-link-model" v-on:click="initEditLink()">
                 <i class="bi bi-pencil-square action-icon"></i>
             </div>
         </div>
@@ -120,6 +120,7 @@ export default {
                 this.linkList[i].isSelected = false;
             }
             this.linkList[index].isSelected = true;
+            this.isSomethingSelected = true;
         },
         newLink() {
             let isLink = /^(http:|https:)\/\//;
@@ -140,6 +141,8 @@ export default {
         },
         changeDir(entry) {
             this.currentPath.push(entry);
+            entry.isSelected = false;
+            this.isSomethingSelected = false;
         },
         newFolder() {
             this.linkList.push({
@@ -245,7 +248,8 @@ export default {
                 link: "",
                 type: ""
             },
-            currentPath: []
+            currentPath: [],
+            isSomethingSelected: false
         }
     }
 }
