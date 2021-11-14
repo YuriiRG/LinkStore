@@ -137,7 +137,8 @@ export default {
                 name: "",
                 purpose: "",
                 link: ""
-            }
+            };
+            this.updateDb();
         },
         changeDir(entry) {
             this.currentPath.push(entry);
@@ -156,13 +157,15 @@ export default {
                 type: "category",
                 isSelected: false,
                 children: []
-            }
+            };
+            this.updateDb();
         },
         removeLink() {
             let selected = this.linkList.filter(c => c.isSelected);
             if (selected.length > 0) {
                 this.linkList.splice(this.linkList.indexOf(selected[0]), 1);
             }
+            this.updateDb();
         },
         initEditLink() {
             this.editLinkData.name = this.getSelectedEntry().name;
@@ -181,12 +184,58 @@ export default {
             this.getSelectedEntry().type = this.editLinkData.type;
             this.getSelectedEntry().purpose = this.editLinkData.purpose;
             this.getSelectedEntry().link = this.editLinkData.link;
+            this.updateDb();
         },
         goUpFolder() {
             if (this.currentPath == [])
                 return;
             this.currentPath.pop();
+        },
+        updateDb() {
+            let transaction = this.db.transaction("links", "readwrite");
+            let links = transaction.objectStore("links");
+            links.clear();
+            for (let i = 0; i < this.linkTree.length; i++) {
+                console.log("Updating db");
+                console.log(JSON.parse(JSON.stringify(this.linkTree[i])));
+                let request = links.add(JSON.parse(JSON.stringify(this.linkTree[i])));
+                request.onsuccess = function() {
+                    console.log("Successfully copied to db", request.result);
+                };
+                request.onerror = function() {
+                    console.error("Error", request.error);
+                };
+            }
         }
+    },
+    beforeMount() {
+        console.log("Start initing db");
+        this.indexedDBRequest = indexedDB.open("LinkStoreDB", 1);
+
+        let openRequest = this.indexedDBRequest;
+
+        openRequest.onupgradeneeded = function() {
+            let db = openRequest.result;
+            if (!db.objectStoreNames.contains('links')) {
+                db.createObjectStore('links', {keyPath: 'name'});
+            }
+        };
+
+        openRequest.onerror = function() {
+            console.error("Error", openRequest.error);
+        };
+
+        openRequest.onsuccess = () => {
+            this.db = openRequest.result;
+            console.log(this);
+            let transaction = this.db.transaction("links", "readonly");
+            let links = transaction.objectStore("links");
+            let request = links.getAll();
+            request.onsuccess = () => {
+                console.log(request.result);
+                this.linkTree = request.result;
+            };
+        };
     },
     computed: {
         onlyFolders: function() {
@@ -277,7 +326,9 @@ export default {
                 type: ""
             },
             currentPath: [],
-            isSomethingSelected: false
+            isSomethingSelected: false,
+            indexedDBRequest: null,
+            db: null
         }
     }
 }
