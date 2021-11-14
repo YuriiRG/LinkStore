@@ -191,12 +191,40 @@ export default {
     computed: {
         onlyFolders: function() {
             let currentFolders = this.linkList;
+            
             currentFolders = currentFolders.filter(c => c.type == "category");
+            
+            currentFolders = currentFolders.sort(function(a, b) {
+                var nameA = a.name.toUpperCase();
+                var nameB = b.name.toUpperCase();
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+                return 0;
+            });
+
             return currentFolders;
         },
         onlyLinks: function() {
             let currentFolders = this.linkList;
+
             currentFolders = currentFolders.filter(c => c.type == "link");
+            
+            currentFolders = currentFolders.sort(function(a, b) {
+                var nameA = a.name.toUpperCase();
+                var nameB = b.name.toUpperCase();
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+                return 0;
+            });
+
             return currentFolders;
         },
         currentFolder: function() {
