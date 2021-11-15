@@ -289,28 +289,7 @@ export default {
     },
     data() {
         return {
-            linkTree: [
-                {
-                    type: "category",
-                    name: "maincat",
-                    isSelected: false,
-                    children: [
-                        {
-                            type: "link",
-                            name: "first",
-                            isSelected: false,
-                            purpose: "test link",
-                            link: "https://example.com",
-                        },
-                        {
-                            type: "category",
-                            name: "second",
-                            isSelected: false,
-                            children: []
-                        }
-                    ]
-                },
-            ],
+            linkTree: [],
             newLinkData: {
                 name: "",
                 purpose: "",
