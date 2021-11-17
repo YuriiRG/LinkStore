@@ -1,5 +1,5 @@
 <template>
-    <tr :class="isSelected ? 'selected' : ''" @click="selectRow()" @dblclick="dblclickHandler()">
+    <tr class="vimium-button" :class="isSelected ? 'selected' : ''" @click="selectRow()" @dblclick="dblclickHandler()">
         <td>
             <i class="bi bi-folder me-1" v-if="type=='category'"></i>
             <i class="bi bi-link me-1" v-else></i>

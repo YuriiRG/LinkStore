@@ -1,16 +1,16 @@
 <template>
     <div class="d-flex flex-row flex-grow-1">
         <div class="bg-light border-end action-sidebar">
-            <div class="border action-icon-block btn" title="Add new link" data-bs-toggle="modal" data-bs-target="#new-link-model">
+            <div class="border action-icon-block btn vimium-button" title="Add new link" data-bs-toggle="modal" data-bs-target="#new-link-model">
                 <i class="bi bi-file-earmark-plus action-icon"></i>
             </div>
-            <div class="border action-icon-block btn" title="Add new folder" data-bs-toggle="modal" data-bs-target="#new-folder-model">
+            <div class="border action-icon-block btn vimium-button" title="Add new folder" data-bs-toggle="modal" data-bs-target="#new-folder-model">
                 <i class="bi bi-folder-plus action-icon"></i>
             </div>
-            <div class="border action-icon-block btn" :class="isSomethingSelected ? '' : 'disabled'" title="Remove" v-on:click="removeLink()">
+            <div class="border action-icon-block btn" :class="isSomethingSelected ? 'vimium-button' : 'disabled'" title="Remove" v-on:click="removeLink()">
                 <i class="bi bi-file-earmark-x action-icon"></i>
             </div>
-            <div class="border action-icon-block btn" :class="isSomethingSelected ? '' : 'disabled'" title="Edit" data-bs-toggle="modal" data-bs-target="#edit-link-model" v-on:click="initEditLink()">
+            <div class="border action-icon-block btn" :class="isSomethingSelected ? 'vimium-button' : 'disabled'" title="Edit" data-bs-toggle="modal" data-bs-target="#edit-link-model" v-on:click="initEditLink()">
                 <i class="bi bi-pencil-square action-icon"></i>
             </div>
         </div>
