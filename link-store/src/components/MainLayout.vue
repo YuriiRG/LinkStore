@@ -118,11 +118,14 @@ export default {
     name: 'MainLayout',
     methods: {
         selectRow(index) {
+            
+            this.linkList[index].isSelected = !this.linkList[index].isSelected;
+
+            this.isSomethingSelected = false;
             for (let i = 0; i < this.linkList.length; i++) {
-                this.linkList[i].isSelected = false;
+                if (this.linkList[i].isSelected == true)
+                    this.isSomethingSelected = true;
             }
-            this.linkList[index].isSelected = true;
-            this.isSomethingSelected = true;
         },
         newLink() {
             let isLink = /^(http:|https:)\/\//;
@@ -167,7 +170,7 @@ export default {
         removeLink() {
             let selected = this.linkList.filter(c => c.isSelected);
             if (selected.length > 0) {
-                this.linkList.splice(this.linkList.indexOf(selected[0]), 1);
+                selected.forEach((_, i) => this.linkList.splice(this.linkList.indexOf(selected[i]), 1));
             }
             this.updateDb();
         },
@@ -361,7 +364,8 @@ main td, main th {
     user-select: none;
     -webkit-user-select: none;
 }
-main tbody tr.selected {
+main tbody span.selected {
     background-color: var(--bs-light);
+    color: green;
 }
 </style>
