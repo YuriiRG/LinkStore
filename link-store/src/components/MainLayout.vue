@@ -36,7 +36,8 @@
                     :isSelected="entry.isSelected"
                     :purpose="entry.purpose"
                     :type="entry.type"
-                    :link="entry.link"/>
+                    :link="entry.link"
+                    :creationDate="entry.creationDate"/>
                     
                     <stored-item v-for="entry in onlyLinks" :key="entry.name" 
                     @selectRow="selectRow(linkList.indexOf(entry))"
@@ -45,7 +46,8 @@
                     :isSelected="entry.isSelected"
                     :purpose="entry.purpose"
                     :type="entry.type"
-                    :link="entry.link"/>
+                    :link="entry.link"
+                    :creationDate="entry.creationDate"/>
                 </tbody>
             </table>
         </main>
@@ -131,7 +133,8 @@ export default {
                 name: this.newLinkData.name,
                 purpose: this.newLinkData.purpose,
                 link: this.newLinkData.link,
-                type: "link"
+                type: "link",
+                creationDate: this.getCurrentDate()
             });
             this.newLinkData = {
                 name: "",
@@ -149,6 +152,7 @@ export default {
             this.linkList.push({
                 name: this.newFolderData.name,
                 type: "category",
+                creationDate: this.getCurrentDate(),
                 isSelected: false,
                 children: []
             });
@@ -206,6 +210,13 @@ export default {
                     console.error("Error", request.error);
                 };
             }
+        },
+        getCurrentDate() {
+            let currentDate = new Date();
+            let cDay = currentDate.getDate();
+            let cMonth = currentDate.getMonth() + 1;
+            let cYear = currentDate.getFullYear();
+            return `${cYear}-${cMonth}-${cDay}`;
         }
     },
     beforeMount() {

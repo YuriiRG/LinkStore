@@ -6,7 +6,7 @@
             {{name}}
         </td>
         <td>{{purpose}}</td>
-        <td>11.11.1111</td>
+        <td>{{creationDate}}</td>
     </tr>
 </template>
 
@@ -18,7 +18,8 @@ export default {
         type: String,
         purpose: String,
         name: String,
-        link: String
+        link: String,
+        creationDate: String
     },
     methods: {
         selectRow() {
