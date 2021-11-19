@@ -364,8 +364,11 @@ main td, main th {
     user-select: none;
     -webkit-user-select: none;
 }
-main tbody span.selected {
-    background-color: var(--bs-light);
-    color: green;
+main tbody div.vimium-button.selected {
+    background-color: var(--bs-primary);
+}
+main tbody div.vimium-button {
+    width: 1rem;
+    height: 1rem;
 }
 </style>
