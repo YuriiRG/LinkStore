@@ -364,6 +364,9 @@ main td, main th {
     user-select: none;
     -webkit-user-select: none;
 }
+main tbody tr.selected {
+    background-color: var(--bs-light);
+}
 main tbody div.vimium-button.selected {
     background-color: var(--bs-primary);
 }

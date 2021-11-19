@@ -1,5 +1,5 @@
 <template>
-    <tr class="vimium-button"  @click="dblclickHandler()">
+    <tr class="vimium-button"  @click="dblclickHandler()" :class="isSelected ? 'selected' : ''">
         <td>
             <div class="d-flex flex-row" style="width: 100%;">
                 <div @click.stop="selectRow()" class="flex-center">
