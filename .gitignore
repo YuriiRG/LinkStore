@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
 /link-store/dist
-/link-store/deploy.bat
+/link-store/deploy.ps1
 
 # local env files
 .env.local
