@@ -147,8 +147,8 @@ export default {
             this.updateDb();
         },
         changeDir(entry) {
+            this.linkList.forEach(c => c.isSelected = false);
             this.currentPath.push(entry);
-            entry.isSelected = false;
             this.isSomethingSelected = false;
         },
         newFolder() {
@@ -194,11 +194,13 @@ export default {
             this.updateDb();
         },
         goUpFolder() {
+            this.linkList.forEach(c => c.isSelected = false);
             if (this.currentPath == [])
                 return;
             this.currentPath.pop();
         },
         updateDb() {
+            this.linkList.forEach(c => c.isSelected = false);
             let transaction = this.db.transaction("links", "readwrite");
             let links = transaction.objectStore("links");
             links.clear();
