@@ -20,7 +20,7 @@
                     <tr>
                         <th style="width: 35%; padding: 0; margin: 0">
                             <div class="d-flex flex-row" style="width: 100%;">
-                                <div v-on:click="goUpFolder()" class="flex-center border-end"><i class="bi bi-arrow-up-short"></i></div>
+                                <div v-on:click="goUpFolder()" class="flex-center border-end vimium-button"><i class="bi bi-arrow-up-short"></i></div>
                                 <div class="flex-grow-1 ps-2">Name</div>
                             </div>
                         </th>
