@@ -1,4 +1,5 @@
 <template>
+    <nav-bar @exportData="exportData()" @importData="importData()" />
     <div class="d-flex flex-row flex-grow-1">
         <div class="bg-light border-end action-sidebar">
             <div class="border action-icon-block btn vimium-button" title="Add new link" data-bs-toggle="modal" data-bs-target="#new-link-model">
@@ -113,8 +114,9 @@
 </template>
 <script>
 import StoredItem from './StoredItem.vue';
+import NavBar from './NavBar.vue';
 export default {
-    components: { StoredItem },
+    components: { StoredItem, NavBar },
     name: 'MainLayout',
     methods: {
         selectRow(index) {
@@ -222,6 +224,30 @@ export default {
             let cMonth = currentDate.getMonth() + 1;
             let cYear = currentDate.getFullYear();
             return `${cYear}-${cMonth}-${cDay}`;
+        },
+        download(filename, text) {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        },
+        exportData() {
+            let transaction = this.db.transaction("links", "readonly");
+            let links = transaction.objectStore("links");
+            let request = links.getAll();
+            let text = "";
+            request.onsuccess = () => {
+                text = JSON.stringify(request.result);
+                this.download("linkstore-export.json", text);
+            };
+        },
+        importData() {
         }
     },
     beforeMount() {

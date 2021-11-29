@@ -18,10 +18,10 @@ export default {
     name: 'NavBar',
     methods: {
         importData() {
-            alert("Imported");
+            this.$emit("importData");
         },
         exportData() {
-            alert("Exported");
+            this.$emit("exportData");
         }
     }
 }
