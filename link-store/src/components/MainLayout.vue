@@ -1,5 +1,5 @@
 <template>
-    <nav-bar @exportData="exportData()" @importData="importData()" />
+    <nav-bar @exportData="exportData()" @importData="importData"/>
     <div class="d-flex flex-row flex-grow-1">
         <div class="bg-light border-end action-sidebar">
             <div class="border action-icon-block btn vimium-button" title="Add new link" data-bs-toggle="modal" data-bs-target="#new-link-model">
@@ -247,7 +247,24 @@ export default {
                 this.download("linkstore-export.json", text);
             };
         },
-        importData() {
+        importData(file) {
+            console.log(file);
+            let fileReader = new FileReader();
+            let importedDataArray = null;
+            fileReader.readAsText(file);
+            fileReader.onload = () => {
+                importedDataArray = fileReader.result;
+                importedDataArray = JSON.parse(importedDataArray);
+
+                let transaction = this.db.transaction("links", "readwrite");
+                let links = transaction.objectStore("links");
+                links.clear();
+                for (let i = 0; i < importedDataArray.length; i++) {
+                    links.add(importedDataArray[i]);
+                }
+                this.linkList.splice(0, this.linkList.length);
+                importedDataArray.forEach((c) => this.linkList.push(c));
+            }
         }
     },
     beforeMount() {
