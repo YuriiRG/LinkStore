@@ -262,8 +262,7 @@ export default {
                 for (let i = 0; i < importedDataArray.length; i++) {
                     links.add(importedDataArray[i]);
                 }
-                this.linkList.splice(0, this.linkList.length);
-                importedDataArray.forEach((c) => this.linkList.push(c));
+                window.location.reload();
             }
         }
     },
